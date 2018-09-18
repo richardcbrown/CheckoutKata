@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\Basket.cs" />
+    <Compile Remove="Models\ProductBDiscount.cs" />
+  </ItemGroup>
+
 </Project>

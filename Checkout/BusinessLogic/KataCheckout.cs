@@ -9,10 +9,14 @@ namespace Checkout.BusinessLogic
     {
         private readonly List<IProduct> _products = new List<IProduct>();
         private readonly IProductFactory _productFactory;
+        private readonly IDiscountCalculator _discountCalculator;
+        private readonly IEnumerable<IDiscount> _discounts;
 
-        public KataCheckout(IProductFactory productFactory)
+        public KataCheckout(IProductFactory productFactory, IDiscountCalculator discountCalculator, IEnumerable<IDiscount> discounts)
         {
             _productFactory = productFactory;
+            _discountCalculator = discountCalculator;
+            _discounts = discounts;
         }
 
         public int GetTotalPrice()
