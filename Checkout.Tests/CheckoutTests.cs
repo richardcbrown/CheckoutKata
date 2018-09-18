@@ -80,5 +80,11 @@ namespace Checkout.Tests
 
             Assert.AreEqual(230, _checkout.GetTotalPrice());
         }
+
+        [Test]
+        public void GetTotalPrice_AddZeroProducts_GetZeroPrice()
+        {
+            Assert.AreEqual(0, _checkout.GetTotalPrice());
+        }
     }
 }
