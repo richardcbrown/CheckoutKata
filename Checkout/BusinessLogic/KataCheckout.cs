@@ -5,7 +5,7 @@ namespace Checkout.BusinessLogic
 {
     public class KataCheckout : ICheckout
     {
-        private int _totalPrice { get; set; }
+        private int _totalPrice { get; set; } = 0;
 
         public int GetTotalPrice()
         {
@@ -14,7 +14,18 @@ namespace Checkout.BusinessLogic
 
         public void Scan(string item)
         {
-            _totalPrice = 50;
+            if (string.IsNullOrWhiteSpace(item))
+                return;
+
+            if (item.Equals("A"))
+            {
+                _totalPrice += 50;
+            }
+
+            if (item.Equals("B"))
+            {
+                _totalPrice += 30;
+            }
         }
     }
 }
