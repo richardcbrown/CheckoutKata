@@ -33,6 +33,22 @@ namespace Checkout.Tests
                 DicountedPrice = 45
             });
 
+            discounts.Add(new Discount
+            {
+                Sku = "C",
+                HasDiscount = false,
+                ItemsRequired = 0,
+                DicountedPrice = 0
+            });
+
+            discounts.Add(new Discount
+            {
+                Sku = "D",
+                HasDiscount = false,
+                ItemsRequired = 0,
+                DicountedPrice = 0
+            });
+
             _checkout = new KataCheckout(new ProductFactory(), calculator, discounts);
         }
 
@@ -85,6 +101,15 @@ namespace Checkout.Tests
         public void GetTotalPrice_AddZeroProducts_GetZeroPrice()
         {
             Assert.AreEqual(0, _checkout.GetTotalPrice());
+        }
+
+        [Test]
+        public void GetTotalPrice_AddNonDiscountedItems_ReturnsSumOfPrices()
+        {
+            _checkout.Scan("C");
+            _checkout.Scan("D");
+
+            Assert.AreEqual(35, _checkout.GetTotalPrice());
         }
     }
 }
