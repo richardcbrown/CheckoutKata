@@ -20,9 +20,9 @@ namespace Checkout.Tests
             discounts.Add(new Discount
             {
                 Sku = "A",
-                HasDiscount = false,
-                ItemsRequired = 0,
-                DicountedPrice = 0
+                HasDiscount = true,
+                ItemsRequired = 3,
+                DicountedPrice = 130
             });
 
             discounts.Add(new Discount
