@@ -1,31 +1,28 @@
 ﻿using Checkout.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Checkout.BusinessLogic
 {
     public class KataCheckout : ICheckout
     {
-        private int _totalPrice { get; set; } = 0;
+        private readonly List<IProduct> _products = new List<IProduct>();
+        private readonly IProductFactory _productFactory;
+
+        public KataCheckout(IProductFactory productFactory)
+        {
+            _productFactory = productFactory;
+        }
 
         public int GetTotalPrice()
         {
-            return _totalPrice;
+            return _products.Sum(p => p.Price);
         }
 
         public void Scan(string item)
         {
-            if (string.IsNullOrWhiteSpace(item))
-                return;
-
-            if (item.Equals("A"))
-            {
-                _totalPrice += 50;
-            }
-
-            if (item.Equals("B"))
-            {
-                _totalPrice += 30;
-            }
+            _products.Add(_productFactory.GetProduct(item));
         }
     }
 }

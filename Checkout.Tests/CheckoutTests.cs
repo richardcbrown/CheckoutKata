@@ -10,7 +10,7 @@ namespace Checkout.Tests
         [Test]
         public void GetTotalPrice_SingleItemAdded_ReturnsSinglePrice()
         {
-            ICheckout checkout = new KataCheckout();
+            ICheckout checkout = new KataCheckout(new ProductFactory());
             checkout.Scan("A");
 
             int price = checkout.GetTotalPrice();
@@ -21,7 +21,7 @@ namespace Checkout.Tests
         [Test]
         public void GetTotalPrice_TwoItemsAdded_ReturnsCombinedPrice()
         {
-            ICheckout checkout = new KataCheckout();
+            ICheckout checkout = new KataCheckout(new ProductFactory());
 
             checkout.Scan("A");
             checkout.Scan("B");
