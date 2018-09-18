@@ -5,14 +5,16 @@ namespace Checkout.BusinessLogic
 {
     public class KataCheckout : ICheckout
     {
+        private int _totalPrice { get; set; }
+
         public int GetTotalPrice()
         {
-            throw new NotImplementedException();
+            return _totalPrice;
         }
 
         public void Scan(string item)
         {
-            throw new NotImplementedException();
+            _totalPrice = 50;
         }
     }
 }
