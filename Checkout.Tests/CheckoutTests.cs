@@ -68,5 +68,17 @@ namespace Checkout.Tests
 
             Assert.AreEqual(45, price);
         }
+
+        [Test]
+        public void GetTotalPrice_AddFiveAItems_ReturnsDiscountedPrice()
+        {
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+
+            Assert.AreEqual(230, _checkout.GetTotalPrice());
+        }
     }
 }
