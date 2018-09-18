@@ -8,11 +8,14 @@ namespace Checkout.Tests
     public class CheckoutTests
     {
         [Test]
-        public void Test1()
+        public void GetTotalPrice_SingleItemAdded_ReturnsSinglePrice()
         {
             ICheckout checkout = new KataCheckout();
-
             checkout.Scan("A");
+
+            int price = checkout.GetTotalPrice();
+
+            Assert.AreEqual(50, price);
         }
     }
 }
