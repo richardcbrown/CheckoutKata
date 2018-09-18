@@ -17,7 +17,32 @@ namespace Checkout.BusinessLogic
 
         public int GetTotalPrice()
         {
-            return _products.Sum(p => p.Price);
+            List<List<IProduct>> discountedProducts = new List<List<IProduct>>();
+            List<IProduct> nonDiscountedProducts = new List<IProduct>();
+            List<IProduct> discountCandidates = new List<IProduct>();
+
+            foreach (var product in _products)
+            {
+                if (product.Sku.Equals("B"))
+                {
+                    discountCandidates.Add(product);
+
+                    if (discountCandidates.Count == 2)
+                    {
+                        discountedProducts.Add(discountCandidates);
+                        discountCandidates = new List<IProduct>();
+                    }
+                }
+                else
+                {
+                    nonDiscountedProducts.Add(product);
+                }
+            }
+
+            // not a full set of discount products, price normally
+            nonDiscountedProducts.AddRange(discountCandidates);
+
+            return (discountedProducts.Count * 45) + nonDiscountedProducts.Sum(p => p.Price);
         }
 
         public void Scan(string item)
