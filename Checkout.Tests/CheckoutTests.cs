@@ -30,5 +30,18 @@ namespace Checkout.Tests
 
             Assert.AreEqual(80, price);
         }
+
+        [Test]
+        public void GetTotalPrice_AddDiscountedItems_ReturnsDiscountedPrice()
+        {
+            ICheckout checkout = new KataCheckout(new ProductFactory());
+
+            checkout.Scan("B");
+            checkout.Scan("B");
+
+            int price = checkout.GetTotalPrice();
+
+            Assert.AreEqual(45, price);
+        }
     }
 }
